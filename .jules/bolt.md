@@ -1,0 +1,3 @@
+## 2024-05-24 - Avoid Heavy Libraries for Simple Formatting
+**Learning:** In this codebase, `moment.js` was being used solely for simple day-of-week formatting (`dddd`), introducing a significant bundle size overhead. The native `Intl.DateTimeFormat` API is fully capable of replacing this and is much faster/lighter.
+**Action:** When working on date/time formatting, always prefer native `Intl` APIs and standard `Date` objects over pulling in heavy libraries like `moment.js` or `date-fns` unless complex manipulation or timezone handling is explicitly required. Always cache `Intl.DateTimeFormat` instances outside components to avoid recreation on every render.
