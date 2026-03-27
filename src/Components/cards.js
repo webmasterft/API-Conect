@@ -1,9 +1,14 @@
 import React from "react";
-import moment from "moment";
+
+// ⚡ Bolt: Cache Intl.DateTimeFormat instance outside the component
+// to avoid expensive re-instantiation on every render cycle.
+const dayFormatter = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
 
 export const Card = props => (
   <div className="card">
-    <p className="day">{moment(props.item.dt_txt).format("dddd")}</p>
+    {/* ⚡ Bolt: Use native Intl.DateTimeFormat instead of heavy moment.js.
+        Replace hyphens with slashes to fix Safari parsing issues with 'YYYY-MM-DD HH:mm:ss' format. */}
+    <p className="day">{dayFormatter.format(new Date(props.item.dt_txt.replace(/-/g, "/")))}</p>
     <p>
       <img
         src={
