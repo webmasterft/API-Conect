@@ -1,0 +1,3 @@
+## 2024-05-24 - Native Date Formatting Instead of moment.js
+**Learning:** The application was using the heavy `moment.js` library solely for formatting the day of the week from the OpenWeatherMap API date string, adding unnecessary bundle weight.
+**Action:** Replace `moment.js` with the native `Intl.DateTimeFormat` API. Ensure the formatter instance is declared outside the React component to prevent expensive re-instantiation on every render cycle. Additionally, remember to replace hyphens with forward slashes (`.replace(/-/g, "/")`) in the date string before passing it to the `Date` constructor to maintain cross-browser compatibility.
