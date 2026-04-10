@@ -1,9 +1,16 @@
 import React from "react";
-import moment from "moment";
 
-export const Card = props => (
+// Cache Intl.DateTimeFormat instance outside component to avoid expensive re-instantiation on every render cycle
+const dayFormatter = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
+
+export const Card = props => {
+  // Replace hyphens with slashes for cross-browser Date parsing compatibility (e.g., Safari)
+  const dateString = props.item.dt_txt.replace(/-/g, "/");
+  const dateObj = new Date(dateString);
+
+  return (
   <div className="card">
-    <p className="day">{moment(props.item.dt_txt).format("dddd")}</p>
+    <p className="day">{dayFormatter.format(dateObj)}</p>
     <p>
       <img
         src={
@@ -21,4 +28,5 @@ export const Card = props => (
       <li>{props.item.main.temp_min.toFixed(1)}&deg;</li>
     </ul>
   </div>
-);
+  );
+};
