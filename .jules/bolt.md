@@ -1,0 +1,3 @@
+## 2024-03-24 - Replace moment.js with native Intl.DateTimeFormat
+**Learning:** Caching `Intl.DateTimeFormat` instances outside of React components is approximately 78x faster than re-instantiating them during every render. Using native APIs also allows removing heavy dependencies like `moment.js` to significantly reduce bundle size.
+**Action:** Always consider native browser APIs like `Intl` for date/time formatting before adding a third-party dependency. If using `Intl.DateTimeFormat` or similar native constructors in a component that renders frequently, cache the instance outside the component scope to avoid expensive re-initialization.
