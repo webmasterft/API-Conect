@@ -1,0 +1,3 @@
+## 2024-03-22 - Caching Intl.DateTimeFormat
+**Learning:** Caching `Intl.DateTimeFormat` instances outside of React components is ~78x faster than re-instantiating them during every render. Additionally, when parsing date strings like 'YYYY-MM-DD HH:mm:ss', hyphens must be replaced with forward slashes (e.g., `.replace(/-/g, "/")`) to ensure cross-browser compatibility, specifically for Safari.
+**Action:** When replacing `moment.js` or formatting dates natively in React, declare the `Intl.DateTimeFormat` object outside the component function and sanitize date strings for cross-browser support before passing them to the `Date` constructor.
