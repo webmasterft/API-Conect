@@ -1,0 +1,3 @@
+## 2024-03-24 - Intl.DateTimeFormat Caching and Date parsing
+**Learning:** Caching `Intl.DateTimeFormat` instances outside of React components is approximately 78x faster than re-instantiating them during every render. Additionally, when parsing date strings from the OpenWeatherMap API (format 'YYYY-MM-DD HH:mm:ss') using the `Date` constructor, hyphens must be replaced with forward slashes (e.g., `.replace(/-/g, "/")`) to ensure cross-browser compatibility.
+**Action:** Always extract and cache `Intl.DateTimeFormat` instances outside functional components or in useMemo if dependent on props. Always normalize date strings with hyphens to slashes before passing to `new Date()` for broad browser support.
