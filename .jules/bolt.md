@@ -1,0 +1,3 @@
+## 2024-06-01 - Native Date Formatting Performance
+**Learning:** Re-instantiating date formatters like `Intl.DateTimeFormat` (or relying on heavy third-party libraries like `moment.js`) inside a React render loop causes unnecessary performance overhead and bloats bundle size. Native `Intl.DateTimeFormat` is significantly faster when the instance is cached outside the component.
+**Action:** Replace `moment.js` with cached instances of `Intl.DateTimeFormat` declared outside component definitions. Use `.replace(/-/g, "/")` on standard Date strings before passing them to the native `Date` constructor to ensure Safari/cross-browser compatibility.
