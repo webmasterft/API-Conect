@@ -1,0 +1,3 @@
+## 2024-06-04 - Native Date Formatting Performance
+**Learning:** The `moment.js` library adds significant bloat (~300kb parsed) and processing overhead. For simple date formatting like converting "YYYY-MM-DD HH:MM:SS" to a weekday name ("dddd"), the native `Intl.DateTimeFormat` API is dramatically faster. Caching the `Intl.DateTimeFormat` instance outside of the component prevents expensive re-instantiations on every render cycle.
+**Action:** Always prefer native `Intl` and `Date` APIs over `moment.js` for basic formatting tasks to minimize bundle size and improve runtime performance. When using `Intl.DateTimeFormat` in React components, ensure the instance is cached globally or memoized outside the render path.
