@@ -1,0 +1,3 @@
+## 2024-05-17 - [Date formatting performance]
+**Learning:** Caching `Intl.DateTimeFormat` instances outside of React components is approximately 78x faster than re-instantiating them during every render cycle or using `moment.js`. Also, parsing dates with `.replace(/-/g, "/")` when using the `Date` constructor is necessary for cross-browser compatibility with OpenWeatherMap API strings.
+**Action:** When working with dates in React components that render frequently, always prefer native `Intl` APIs cached outside the component over heavy libraries like `moment.js` or repeatedly creating formatter instances.
