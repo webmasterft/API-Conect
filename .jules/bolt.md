@@ -1,0 +1,3 @@
+## 2024-10-25 - Caching Intl.DateTimeFormat
+**Learning:** In this project, date formatting in `src/Components/cards.js` was done using `moment.js` on every render. However, `moment` is heavy and slow. Re-instantiating `Intl.DateTimeFormat` on every render is also slower. The best performance is achieved by instantiating `Intl.DateTimeFormat` once outside the React component. Also, when parsing date strings like 'YYYY-MM-DD HH:mm:ss', hyphens must be replaced with slashes (`.replace(/-/g, "/")`) to avoid cross-browser compatibility issues in Safari.
+**Action:** Always prefer cached `Intl.DateTimeFormat` over `moment.js` or inline instantiations for better render performance and reduced bundle size.
