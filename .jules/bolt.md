@@ -1,0 +1,3 @@
+## 2024-05-24 - [Replace moment.js with cached Intl.DateTimeFormat in React Components]
+**Learning:** Benchmarking confirmed that caching 'Intl.DateTimeFormat' instances outside of React components is significantly faster (orders of magnitude) than re-instantiating them during every render cycle or using moment.js. This reduces bundle size and avoids memory churn during rapid re-renders.
+**Action:** When formatting dates in React components, avoid importing heavy libraries like moment.js if native `Intl.DateTimeFormat` suffices. Always cache the formatter instance outside the component definition to prevent recreation on every render. Use `.replace(/-/g, "/")` when parsing OpenWeatherMap dates for cross-browser support.
