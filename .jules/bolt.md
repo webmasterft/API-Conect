@@ -1,0 +1,3 @@
+## 2024-05-18 - [Intl.DateTimeFormat vs Moment.js in React Renders]
+**Learning:** Instantiating `moment.js` or even native `Intl.DateTimeFormat` within the React render cycle (e.g. mapping over items to render a list) is extremely costly. Native `Intl.DateTimeFormat` is vastly faster (~10x in benchmarks) when cached outside the component than instantiating `moment()` repeatedly inside it.
+**Action:** When formatting dates in React components, especially within loops, cache `Intl.DateTimeFormat` instances outside the component function/class rather than importing heavy libraries like `moment.js` or re-instantiating date formatters on every render.
