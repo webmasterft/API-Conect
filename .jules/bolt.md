@@ -1,0 +1,3 @@
+## 2024-05-24 - Cached Intl.DateTimeFormat vs Moment.js
+**Learning:** Caching an `Intl.DateTimeFormat` instance outside of React components is significantly faster (orders of magnitude) than re-instantiating it or using `moment.js` during every render cycle. When parsing date strings from the OpenWeatherMap API (format 'YYYY-MM-DD HH:mm:ss') using the native `Date` constructor, hyphens must be replaced with forward slashes (e.g., `.replace(/-/g, "/")`) to ensure cross-browser compatibility (specifically older Safari).
+**Action:** Replace `moment` with a cached `Intl.DateTimeFormat` for simple date formatting tasks to reduce bundle size and improve render performance.
