@@ -1,13 +1,20 @@
 import React from "react";
-import moment from "moment";
+
+// Cached DateTimeFormat instance for better performance, replaces moment.js
+const dateFormatter = new Intl.DateTimeFormat("en-US", { weekday: "long" });
+
+const formatDay = (dtTxt) => {
+  const dateStr = dtTxt.replace(/-/g, "/");
+  return dateFormatter.format(new Date(dateStr));
+};
 
 export const Card = props => (
   <div className="card">
-    <p className="day">{moment(props.item.dt_txt).format("dddd")}</p>
+    <p className="day">{formatDay(props.item.dt_txt)}</p>
     <p>
       <img
         src={
-          "http://openweathermap.org/img/w/" +
+          "https://openweathermap.org/img/w/" +
           props.item.weather[0].icon +
           ".png"
         }
