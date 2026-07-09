@@ -1,0 +1,3 @@
+## 2024-05-24 - Caching Intl.DateTimeFormat for React Render Performance
+**Learning:** In React components that render frequently or in lists (like the forecast cards), repeatedly creating `Intl.DateTimeFormat` instances or calling heavy libraries like `moment.js` inside the render function causes significant performance degradation. The overhead of instantiating `Intl.DateTimeFormat` is high.
+**Action:** Always cache `Intl.DateTimeFormat` instances outside the component function scope to ensure they are created only once per module execution, significantly improving render times and reducing garbage collection pressure.
