@@ -1,9 +1,14 @@
 import React from "react";
-import moment from "moment";
+
+// Cache Intl.DateTimeFormat instance to avoid recreating it on every render,
+// significantly improving performance compared to using moment.js
+const dateFormatter = new Intl.DateTimeFormat("en-US", { weekday: "long" });
 
 export const Card = props => (
   <div className="card">
-    <p className="day">{moment(props.item.dt_txt).format("dddd")}</p>
+    <p className="day">
+      {dateFormatter.format(new Date(props.item.dt_txt.replace(/-/g, "/")))}
+    </p>
     <p>
       <img
         src={
