@@ -1,0 +1,3 @@
+## 2024-06-25 - [Date Formatting Performance]
+**Learning:** Instantiating `moment` or even `Intl.DateTimeFormat` inside a component render function incurs a performance penalty. Since `Intl.DateTimeFormat` is native, caching it outside the component and reusing it is significantly faster (orders of magnitude) than using moment.js or creating new formatter instances on every render.
+**Action:** Always prefer native `Intl.DateTimeFormat` over `moment.js` where possible, and strictly cache the instance outside the React component or use `useMemo` if locale/options depend on props, to avoid unnecessary instantiation overhead.
