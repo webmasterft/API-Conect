@@ -1,0 +1,3 @@
+## 2024-03-24 - Cached Intl.DateTimeFormat vs moment.js
+**Learning:** In this React app, instantiating `moment.js` or even `Intl.DateTimeFormat` inside the render function of a heavily repeated component (like `Card` which is rendered for every forecast item) creates unnecessary overhead and bundle bloat. Benchmarks confirm that caching a single `Intl.DateTimeFormat` instance outside the component is orders of magnitude faster.
+**Action:** When formatting dates in repeated components, always instantiate `Intl.DateTimeFormat` once outside the component scope instead of using heavy libraries like `moment.js` or creating new instances per render.
