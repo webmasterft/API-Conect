@@ -1,0 +1,3 @@
+## 2024-05-16 - Caching Intl.DateTimeFormat instead of using moment.js
+**Learning:** Instantiating `moment.js` or `Intl.DateTimeFormat` inside a component's render cycle (like in a mapped list of Cards) is a massive performance bottleneck. Re-instantiating `Intl.DateTimeFormat` per item can be orders of magnitude slower than caching a single instance.
+**Action:** When formatting dates across multiple components or list items, always instantiate `new Intl.DateTimeFormat(...)` once outside the component and reuse that cached instance. Completely remove heavy libraries like `moment.js` when native `Intl` APIs can handle the formatting requirements.
