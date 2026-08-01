@@ -1,0 +1,3 @@
+## 2024-05-18 - [Replace moment.js with cached Intl.DateTimeFormat for faster weekday rendering]
+**Learning:** Using `moment.js` to parse and format dates inside a React component's render cycle (like in lists of cards) creates significant overhead. Furthermore, repeatedly instantiating `Intl.DateTimeFormat` during renders is also sub-optimal.
+**Action:** When basic date formatting (like getting the day of the week) is required, use the native `Intl.DateTimeFormat` API and ensure the formatter instance is created *outside* the component to prevent re-instantiation on every render. Also remember to normalize date strings (e.g. replace hyphens with slashes) to ensure cross-browser parsing compatibility with the native `Date` object.
