@@ -1,13 +1,19 @@
 import React from "react";
-import moment from "moment";
 
-export const Card = props => (
+// Cache Intl.DateTimeFormat instance outside the component to prevent re-instantiation
+// This is significantly faster than using moment() or re-creating Intl instances on every render
+const dateFormatter = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
+
+export const Card = props => {
+  // Replace hyphens with slashes for cross-browser date parsing compatibility
+  const dtStr = props.item.dt_txt.replace(/-/g, "/");
+  return (
   <div className="card">
-    <p className="day">{moment(props.item.dt_txt).format("dddd")}</p>
+    <p className="day">{dateFormatter.format(new Date(dtStr))}</p>
     <p>
       <img
         src={
-          "http://openweathermap.org/img/w/" +
+          "https://openweathermap.org/img/w/" +
           props.item.weather[0].icon +
           ".png"
         }
@@ -21,4 +27,4 @@ export const Card = props => (
       <li>{props.item.main.temp_min.toFixed(1)}&deg;</li>
     </ul>
   </div>
-);
+)};
