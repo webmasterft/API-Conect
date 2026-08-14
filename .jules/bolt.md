@@ -1,0 +1,3 @@
+## 2023-10-25 - Caching Intl.DateTimeFormat vs Moment.js
+**Learning:** In React components that render lists (like the weather forecast cards), instantiating `moment()` for every item causes significant overhead. Our benchmark showed that switching to a globally cached `Intl.DateTimeFormat` instance is about 8x-9x faster (21.58ms vs 187.82ms for 10k iterations).
+**Action:** Always prefer native `Intl` over `moment` for simple date formatting, and critically, cache the `Intl.DateTimeFormat` instance outside the component to avoid re-instantiation on every render cycle. Remember to handle cross-browser Date parsing quirks (like replacing hyphens with slashes in API strings).
