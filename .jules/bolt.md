@@ -1,0 +1,3 @@
+## 2024-05-17 - Caching Intl.DateTimeFormat
+**Learning:** Instantiating `Intl.DateTimeFormat` inside React components or loops is significantly expensive. Benchmarking confirmed that caching these instances outside of components is orders of magnitude faster than re-instantiating them or using libraries like `moment.js`. Also, parsing 'YYYY-MM-DD HH:mm:ss' directly with JS `Date` breaks in Safari; replacing hyphens with slashes is necessary for cross-browser support without moment.
+**Action:** When replacing moment.js or formatting dates natively, always cache the `Intl.DateTimeFormat` instance globally or outside the component's render cycle, and sanitize date strings with `.replace(/-/g, "/")` to ensure cross-browser parsing reliability.
