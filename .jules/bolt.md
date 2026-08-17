@@ -1,0 +1,3 @@
+## 2024-08-17 - Performance overhead of moment.js and object instantiations during render
+**Learning:** Instantiating `moment.js` or even `Intl.DateTimeFormat` within a React render cycle is a heavy performance bottleneck, significantly impacting render times (e.g., 3.7s vs 30ms for 10k operations).
+**Action:** When formatting strings (like dates), cache objects like `Intl.DateTimeFormat` outside of the React component whenever possible instead of relying on slow libraries or recreating them on each render. Be sure to handle cross-browser compatibility (e.g. replacing hyphens with slashes in date strings) manually.
