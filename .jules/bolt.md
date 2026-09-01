@@ -1,0 +1,3 @@
+## 2024-03-24 - [Intl.DateTimeFormat vs Moment.js performance]
+**Learning:** Caching 'Intl.DateTimeFormat' instances outside of React components is orders of magnitude faster than re-instantiating them or using moment.js during every render cycle.
+**Action:** Always prefer native Intl API over heavy libraries like moment.js for simple date formatting, and ensure the formatter instance is cached outside the render path to avoid repeated allocation overhead.
