@@ -1,0 +1,3 @@
+## 2024-05-24 - [Replace moment.js with cached Intl.DateTimeFormat in React Renders]
+**Learning:** Instantiating `moment.js` or even native `Intl.DateTimeFormat` within the render cycle of a React component (like `Card` rendering lists of weather items) causes a significant performance bottleneck due to redundant object creation and parsing. Benchmarking showed that caching a single `Intl.DateTimeFormat` instance outside the component scope is orders of magnitude faster.
+**Action:** When formatting dates in React components, especially within loops or lists, extract and cache the formatter (like `Intl.DateTimeFormat`) outside the component to prevent re-instantiation on every render.
