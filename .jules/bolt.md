@@ -1,0 +1,3 @@
+## 2026-09-13 - Replaced moment.js with cached Intl.DateTimeFormat
+**Learning:** For simple localized date/time formatting (like extracting weekday names), pulling in large libraries like `moment.js` incurs unnecessary processing overhead on every render cycle. `Intl.DateTimeFormat` is native and fast, but it MUST be cached outside the render loop; re-instantiating it per component per render is actually slower than just calling `moment()`.
+**Action:** Always prefer cached `Intl.DateTimeFormat` instances over `moment.js` or `date-fns` for basic localization formatting. Verify instance caching to avoid accidental performance regressions when converting.
