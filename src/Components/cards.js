@@ -1,13 +1,17 @@
 import React from "react";
-import moment from "moment";
 
-export const Card = props => (
+// Cache the formatter to avoid re-instantiation on every render
+const dayFormatter = new Intl.DateTimeFormat("en-US", { weekday: "long" });
+
+export const Card = React.memo(props => (
   <div className="card">
-    <p className="day">{moment(props.item.dt_txt).format("dddd")}</p>
+    <p className="day">
+      {dayFormatter.format(new Date(props.item.dt_txt.replace(/-/g, "/")))}
+    </p>
     <p>
       <img
         src={
-          "http://openweathermap.org/img/w/" +
+          "https://openweathermap.org/img/w/" +
           props.item.weather[0].icon +
           ".png"
         }
@@ -21,4 +25,4 @@ export const Card = props => (
       <li>{props.item.main.temp_min.toFixed(1)}&deg;</li>
     </ul>
   </div>
-);
+));
